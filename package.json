@@ -1,0 +1,21 @@
+{
+  "name": "BarryStaesReactPlayground",
+  "version": "0.0.1",
+  "private": true,
+  "description": "My playground to learn React.",
+  "author": "Barry Staes <barry@staes.nl>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/barrystaes/ReactPlayground"
+  },
+  "dependencies": {
+    "react": "^0.12.0"
+  },
+  "devDependencies": {
+    "browserify": "*",
+    "grunt": "*",
+    "grunt-browserify": "*",
+    "grunt-react": "*",
+    "grunt-contrib-watch": "*"
+  }
+}

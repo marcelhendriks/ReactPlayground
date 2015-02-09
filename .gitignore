@@ -1,6 +1,15 @@
-# Created by https://www.gitignore.io
+### Project specific ###
+
+## Generated folders/files ##
+# Created by running 'npm install' in project root, do when installing.
+node_modules
+# Created by running 'grunt' in project root, do after changing files.
+build
+
+
 
 ### WebStorm ###
+# Created by https://www.gitignore.io
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
 *.iml
@@ -47,3 +56,6 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
+
+
+### Other ###
