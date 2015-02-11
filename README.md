@@ -8,3 +8,4 @@ No practical use intended except to learn/experiment with React, JSX, flux patte
 - Develop: apply elbows in your editor of choice, i use WebStorm.
 - Build: run `grunt` (or `grunt watch`) to make bundle.
 - Run: Open index.html in modern browser.
+- Debug: mind build output, mind browser JS console, inspect React components using Chrome + React Developer Tools extension.
