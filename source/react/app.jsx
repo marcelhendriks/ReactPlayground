@@ -8,7 +8,7 @@
  * 2015-02-05 Barry: Created minimal working React test.
  * 2015-02-09 Barry: Added buildchain to facilitate JSX transform and require().
  *                   Based on https://github.com/simonsmith/react-commonjs-example/
- *
+ * 2015-02-12 Barry: Replaced browserify with webpack, in preparation for live reloading and css bundling.
  */
 
 "use strict"
@@ -19,7 +19,10 @@ var BarryTest = require('./components/BarryTest.jsx');
 // Fix facilitate React tab in Chrome inspection
 window.React = React;
 
-React.render(
-    <BarryTest name="Barry" />,
-    document.getElementById('content')
-);
+module.exports = React.createClass({
+    render: function() {
+        return (
+            <BarryTest name="Barry with webpack" />
+        );
+    }
+});

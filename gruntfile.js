@@ -1,29 +1,31 @@
 module.exports = function(grunt) {
+
+    var webpack = require('webpack');
+
+    // The loader transforms our JSX content
+    var module = {
+        loaders: [{
+            test: /\.jsx?$/,
+            loader: 'jsx'
+        }]
+    };
+
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-
-        watch: {
-            react: {
-                files: 'source/react/**/*.jsx',
-                tasks: ['browserify']
-            }
-        },
-
-        browserify: {
-            options: {
-                transform: [ require('grunt-react').browserify ]
-            },
-            client: {
-                src: ['source/react/**/*.jsx'],
-                dest: 'build/appbundle.js'
+        webpack: {
+            buildname: {
+                entry: "./source/main.js",
+                watch: true,
+                keepalive: true,
+                devtool: "#inline-source-map", // Here we get our sourcemap
+                output: {
+                    filename: 'appbundle.js',
+                    path: './build'
+                },
+                module: module
             }
         }
     });
 
-    grunt.loadNpmTasks('grunt-browserify');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-
-    grunt.registerTask('default', [
-        'browserify'
-    ]);
-};
+    grunt.loadNpmTasks('grunt-webpack');
+    grunt.registerTask('default', ['webpack:buildname']);
+}
