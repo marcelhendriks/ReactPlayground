@@ -3,14 +3,13 @@
 "use strict"
 
 var React = require('react');
+var OpenRaGame = require('./OpenRaGame.jsx');
 
 /**
  *  React component OpenRaGames
  *
- *  Usage: in JS do
- *    var games = json parse http://master.openra.net/games_json
- *  and in JSX do
- *    <OpenRaGameList games={games} />
+ *  Usage:
+ *    <OpenRaGames source="http://master.openra.net/games_json" />
  */
 module.exports = React.createClass({
     getInitialState: function() {
@@ -33,18 +32,14 @@ module.exports = React.createClass({
         if (!this.state.games) {
             return <div>Loading...</div>;
         } else {
+            var gamesList = this.state.games.map(function (game) {
+                return(
+                    <OpenRaGame game={game} />
+                );
+            });
             return (
                 <ul>
-                    {this.state.games.map(function(game) {
-                        return (
-                            <li key={game.id}>
-                                <h2>{game.name}</h2>
-                                <p>Players: {game.players} - {game.maxplayers}</p>
-                                <p>Spectators: {game.spectators}, Bots: {game.bots}</p>
-                                <p>Address: {game.address}</p>
-                            </li>
-                        );
-                    })}
+                    {gamesList}
                 </ul>
             );
         }
