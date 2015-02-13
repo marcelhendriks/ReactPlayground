@@ -8,10 +8,10 @@ var React = require('react');
 var OpenRa = Object.freeze({
     // Values used at http://master.openra.net/games_json
     JSON : {
-        // Game state
+        // Game state id
         GAME_WAITING : 1,
         GAME_PLAYING : 2,
-        // Game mod
+        // Game mod name
         MODS : {
             "ra": "Red Alert",
             "cnc": "Tiberian Dawn",
@@ -34,17 +34,15 @@ module.exports = React.createClass({
         var game = this.props.game;
 
         var modver = game.mods.split('@');
-        var modText;
+        var modText = 'Mod unknown ('+game.mods+')';
         if (modver[0] in OpenRa.JSON.MODS) {
             modText = OpenRa.JSON.MODS[modver[0]];
-        } else {
-            modText = 'Mod unknown ('+game.mods+')';
         }
 
         return(
             <li>
                 <h2>{game.name}</h2>
-                <p>State: {(game.state==OpenRa.JSON.GAME_PLAYING) ? "Playing" : "Waiting"}</p>
+                <p>State: {(game.state==OpenRa.JSON.GAME_PLAYING) ? 'Playing' : 'Waiting'}</p>
                 <p>Mod: {modText}</p>
                 <p>Players: {game.players} - {game.maxplayers}</p>
                 <p>Spectators: {game.spectators}, Bots: {game.bots}</p>

@@ -18,30 +18,34 @@ module.exports = React.createClass({
         };
     },
 
+    loadGamesFromServer: function() {
+        $.ajax({
+            url: this.props.source,
+            dataType: 'json',
+            success: function(data) {
+                this.setState({games: data});
+                console.log('games load ok');
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(this.props.source, status, err.toString());
+            }.bind(this)
+        });
+        console.log('games load start');
+    },
+
     componentDidMount: function() {
-        $.get(this.props.source, function(result) {
-            if (this.isMounted()) {
-                this.setState({
-                    games: JSON.parse(result)
-                });
-            }
-        }.bind(this));
+        this.loadGamesFromServer();
+        setInterval(this.loadGamesFromServer, this.props.pollInterval);
     },
     
     render: function() {
         if (!this.state.games) {
-            return <div>Loading...</div>;
+            return <div>Loading...</div>
         } else {
             var gamesList = this.state.games.map(function (game) {
-                return(
-                    <OpenRaGame game={game} />
-                );
+                return <OpenRaGame game={game} />
             });
-            return (
-                <ul>
-                    {gamesList}
-                </ul>
-            );
+            return <ul>{gamesList}</ul>
         }
     }
 
