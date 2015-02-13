@@ -15,6 +15,7 @@
 
 var React = require('react');
 var BarryTest = require('./components/BarryTest.jsx');
+var OpenRaGames = require('./components/OpenRaGames.jsx');
 
 // Fix facilitate React tab in Chrome inspection
 window.React = React;
@@ -22,7 +23,10 @@ window.React = React;
 module.exports = React.createClass({
     render: function() {
         return (
-            <BarryTest name="Barry with webpack" />
+            <div>
+                <BarryTest name="Barry with webpack" />
+                <OpenRaGames source="http://master.openra.net/games_json" />
+            </div>
         );
     }
 });
