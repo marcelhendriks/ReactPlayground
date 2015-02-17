@@ -24,7 +24,7 @@ module.exports = React.createClass({
     render: function() {
         return (
             <div>
-                <BarryTest name="Barry with webpack" />
+                <BarryTest name="Barry 17-aa" />
                 <OpenRaGames source="http://master.openra.net/games_json" pollInterval={2000} />
             </div>
         );

@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         webpack: {
             buildname: {
-                entry: "./source/main.js",
+                entry: "./source/scripts/main.js",
                 watch: true,
                 keepalive: true,
                 devtool: "#inline-source-map", // Here we get our sourcemap
