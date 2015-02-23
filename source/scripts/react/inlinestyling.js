@@ -45,3 +45,5 @@ function m() {
     }
     return res;
 }
+
+module.exports = m;

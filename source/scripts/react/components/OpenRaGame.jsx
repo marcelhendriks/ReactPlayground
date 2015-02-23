@@ -3,6 +3,7 @@
 "use strict"
 
 var React = require('react');
+var m = require('./../inlinestyling.js');
 
 // Constants
 var OpenRa = Object.freeze({
