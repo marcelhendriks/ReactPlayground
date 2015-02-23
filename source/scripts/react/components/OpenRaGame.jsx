@@ -33,14 +33,31 @@ module.exports = React.createClass({
     render: function() {
         var game = this.props.game;
 
+        // Intermediate vars
         var modver = game.mods.split('@');
         var modText = 'Mod unknown ('+game.mods+')';
         if (modver[0] in OpenRa.JSON.MODS) {
             modText = OpenRa.JSON.MODS[modver[0]];
         }
+        var gameAvailable = (game.state==OpenRa.JSON.GAME_WAITING);
 
+        // Inline styles > CSS
+        var styles = {
+            container: {
+                'background-color' : 'yellow'
+            },
+            unavailable: {
+                'background-color' : '#0082C6',
+                color: 'darkgray'
+            }
+        };
+
+        // Content JSX > HTML
         return(
-            <li>
+            <li style={m(
+                styles.container,
+                !gameAvailable && styles.unavailable
+            )}>
                 <h2>{game.name}</h2>
                 <p>State: {(game.state==OpenRa.JSON.GAME_PLAYING) ? 'Playing' : 'Waiting'}</p>
                 <p>Mod: {modText}</p>
