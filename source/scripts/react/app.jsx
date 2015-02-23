@@ -18,8 +18,10 @@ var React = require('react');
 var BarryTest = require('./components/BarryTest.jsx');
 var OpenRaGames = require('./components/OpenRaGames.jsx');
 
-// Fix facilitate React tab in Chrome inspection
-window.React = React;
+// Debug clientside: facilitate React tab in Chrome inspection
+if (typeof window !== undefined) {
+    window.React = React;
+}
 
 module.exports = React.createClass({
     render: function() {
