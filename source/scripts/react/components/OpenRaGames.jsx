@@ -43,9 +43,17 @@ module.exports = React.createClass({
             return <div>Loading...</div>
         } else {
             var gamesList = this.state.games.map(function (game) {
-                return <OpenRaGame game={game} />
+                return <OpenRaGame game={game} key={game.id} />
             });
-            return <ul>{gamesList}</ul>
+            return(
+                <div>
+                    <h1>Test Table</h1>
+                    <table>
+                        <thead><tr><th>Server</th><th>Status</th><th>Mod</th><th>Map</th></tr></thead>
+                        <tbody>{gamesList}</tbody>
+                    </table>
+                </div>
+            );
         }
     }
 

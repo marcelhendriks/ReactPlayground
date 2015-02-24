@@ -29,6 +29,8 @@ var OpenRa = Object.freeze({
  *
  *  Usage:
  *    <OpenRaGame game={game} />
+ *
+ *  See /test/games.json for game properties.
  */
 module.exports = React.createClass({
     render: function() {
@@ -55,18 +57,15 @@ module.exports = React.createClass({
 
         // Content JSX > HTML
         return(
-            <li style={m(
+            <tr style={m(
                 styles.container,
                 !gameAvailable && styles.unavailable
             )}>
-                <h2>{game.name}</h2>
-                <p>State: {(game.state==OpenRa.JSON.GAME_PLAYING) ? 'Playing' : 'Waiting'}</p>
-                <p>Mod: {modText}</p>
-                <p>Players: {game.players} - {game.maxplayers}</p>
-                <p>Spectators: {game.spectators}, Bots: {game.bots}</p>
-                <p>Address: {game.address}</p>
-                <p>Location: {game.location}</p>
-            </li>
+                <td><p>{game.name}</p><small>{game.address}</small></td>
+                <td><p>{(game.state==OpenRa.JSON.GAME_PLAYING) ? 'Playing' : 'Waiting'}</p><small>{game.players} players</small></td>
+                <td><p>{modText}</p><small>..</small></td>
+                <td><p>..</p><small>..</small></td>
+            </tr>
         );
     }
 

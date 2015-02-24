@@ -1,7 +1,7 @@
 // SASS compiled to CSS by webpack
 
 $pathPrefix: '/PlaylistCRUD';
-$primaryColor: #ffb207;
+$primaryColor: #C5C0A3;
 
 // ----- Define variables above this line -----
 
@@ -10,6 +10,13 @@ body {
   color: black;
 }
 
+table {
+  border: none;
+}
+
+/* Deprecated parts / kept as reference / example code
+
 ul {
   list-style-image: url('#{$pathPrefix}/source/images/dummy.gif');
 }
+*/
