@@ -12,6 +12,7 @@ var OpenRa = Object.freeze({
         // Game state id
         GAME_WAITING : 1,
         GAME_PLAYING : 2,
+        GAME_FINISHED: 3,
         // Game mod name
         MODS : {
             "ra": "Red Alert",
@@ -39,9 +40,8 @@ module.exports = React.createClass({
         // Intermediate vars
         var modver = game.mods.split('@');
         var modText = 'Mod unknown ('+game.mods+')';
-        if (modver[0] in OpenRa.JSON.MODS) {
-            modText = OpenRa.JSON.MODS[modver[0]];
-        }
+        if (modver[0] in OpenRa.JSON.MODS) { modText = OpenRa.JSON.MODS[modver[0]]; }
+        var modRelease = modver[1];
         var gameAvailable = (game.state==OpenRa.JSON.GAME_WAITING);
 
         // Inline styles > CSS
@@ -63,8 +63,8 @@ module.exports = React.createClass({
             )}>
                 <td><p>{game.name}</p><small>{game.address}</small></td>
                 <td><p>{(game.state==OpenRa.JSON.GAME_PLAYING) ? 'Playing' : 'Waiting'}</p><small>{game.players} players</small></td>
-                <td><p>{modText}</p><small>..</small></td>
-                <td><p>..</p><small>..</small></td>
+                <td><p>{modText}</p><small>{modRelease}</small></td>
+                <td><p>todo</p><small>..</small></td>
             </tr>
         );
     }

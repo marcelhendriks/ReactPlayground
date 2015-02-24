@@ -42,12 +42,22 @@ module.exports = React.createClass({
         if (!this.state.games) {
             return <div>Loading...</div>
         } else {
+            var activePlayers = 0;
+            var activeServers = 0;
+
+            // React child components > array
             var gamesList = this.state.games.map(function (game) {
+                // While at it, count totals.
+                activePlayers += parseInt(game['players']);
+                if ((game.players>0) && (game.state!=3)) activeServers++;
+
                 return <OpenRaGame game={game} key={game.id} />
             });
+
             return(
                 <div>
-                    <h1>Test Table</h1>
+                    <h1>Server Browser</h1>
+                    <p>{activePlayers} players active in {activeServers} advertized servers.</p>
                     <table>
                         <thead><tr><th>Server</th><th>Status</th><th>Mod</th><th>Map</th></tr></thead>
                         <tbody>{gamesList}</tbody>
