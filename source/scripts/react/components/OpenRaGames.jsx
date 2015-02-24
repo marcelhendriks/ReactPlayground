@@ -4,6 +4,7 @@
 
 var React = require('react');
 var OpenRaGame = require('./OpenRaGame.jsx');
+var OpenRa = require('./../../openra/OpenRaConst.js');
 
 /**
  *  React component OpenRaGames
@@ -43,7 +44,7 @@ module.exports = React.createClass({
         if (!this.state.games) {
             return <div>Loading...</div>
         } else {
-            var filterActiveOnly = function(game) { return ((game.players > 0) && (game.state != 3)); };
+            var filterActiveOnly = function(game) { return ((game.players > 0) && (game.state != OpenRa.JSON.GAME_FINISHED)); };
 
             // Collect stats
             var games = this.state.games.filter(filterActiveOnly);
