@@ -14,7 +14,8 @@ var OpenRaGame = require('./OpenRaGame.jsx');
 module.exports = React.createClass({
     getInitialState: function() {
         return {
-            games: null
+            games: null,
+            showAllGames: false
         };
     },
 
@@ -42,15 +43,20 @@ module.exports = React.createClass({
         if (!this.state.games) {
             return <div>Loading...</div>
         } else {
-            var activePlayers = 0;
-            var activeServers = 0;
+            var filterActiveOnly = function(game) { return ((game.players > 0) && (game.state != 3)); };
+
+            // Collect stats
+            var games = this.state.games.filter(filterActiveOnly);
+            var activeServers = games.length;
+            var activePlayers = games.map(function(game) { return parseInt(game.players); }).reduce(function(a,b) { return a+b; }, 0);
+            // ^ Using the common map-reduce pattern. Traditional code for this integer sum would be:
+            // var activePlayers = 0; for(var i=0; i<games.length; ++i) { activePlayers = activePlayers + parseInt(games[i].players); }
+
+            // Show all games?
+            if (this.state.showAllGames) { games = this.state.games };
 
             // React child components > array
-            var gamesList = this.state.games.map(function (game) {
-                // While at it, count totals.
-                activePlayers += parseInt(game['players']);
-                if ((game.players>0) && (game.state!=3)) activeServers++;
-
+            var gamesList = games.map(function (game) {
                 return <OpenRaGame game={game} key={game.id} />
             });
 
