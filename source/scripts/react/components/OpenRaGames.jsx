@@ -12,14 +12,22 @@ var OpenRa = require('./../../openra/OpenRaConst.js');
  *  Usage:
  *    <OpenRaGames source="http://master.openra.net/games_json" />
  */
-module.exports = React.createClass({
+var OpenRaGames = React.createClass({
 
-    /* props:
-        source
-        pollInterval
-        filterText
-        showAllGames
-    */
+    propTypes: {
+        source:       React.PropTypes.string,
+        pollInterval: React.PropTypes.number,
+        filterText:   React.PropTypes.string,
+        showAllGames: React.PropTypes.bool
+    },
+
+    getDefaultProps: function() {
+        return {
+            pollInterval: 0,
+            filterText: '',
+            showAllGames: false
+        };
+    },
 
     getInitialState: function() {
         return {
@@ -44,7 +52,9 @@ module.exports = React.createClass({
 
     componentDidMount: function() {
         this.loadGamesFromServer();
-        setInterval(this.loadGamesFromServer, this.props.pollInterval);
+        if (this.props.pollInterval > 0) {
+            setInterval(this.loadGamesFromServer, this.props.pollInterval);
+        }
     },
     
     render: function() {
@@ -53,7 +63,9 @@ module.exports = React.createClass({
         } else {
             var filterActiveOnly = function(game) { return ((game.players > 0) && (game.state != OpenRa.JSON.GAME_FINISHED)); };
             var filterText = function(game) {
-                return (game.name.indexOf(this.props.filterText) > -1);
+                return (
+                    (game.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) > -1)
+                );
             }.bind(this);
 
             // Collect stats
@@ -72,6 +84,9 @@ module.exports = React.createClass({
             games.forEach(function(game) {
                 rows.push(<OpenRaGame game={game} key={game.id} />);
             });
+            if (rows.length===0) {
+                rows.push(<tr><td colspan='4'>Nothing to display.</td></tr>);
+            }
 
             return(
                 <div>
@@ -86,3 +101,5 @@ module.exports = React.createClass({
     }
 
 });
+
+module.exports = OpenRaGames;

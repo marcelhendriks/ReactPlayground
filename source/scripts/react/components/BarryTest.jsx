@@ -9,10 +9,12 @@ var React = require('react');
  *
  *  usage: JSX  <BarryTest name="Barry Staes"/>
  */
-module.exports = React.createClass({
+var BarryTest = React.createClass({
     render: function() {
         return (
             <div>Hello {this.props.name}</div>
         );
     }
 });
+
+module.exports = BarryTest;

@@ -10,6 +10,8 @@
  *                   Based on https://github.com/simonsmith/react-commonjs-example/
  * 2015-02-12 Barry: Replaced browserify with webpack, in preparation for live reloading and css bundling.
  * 2015-02-18 Barry: Added webpack SASS loaders for CSS. Based on http://stackoverflow.com/a/26876311/2096041
+ * 2015-02-25 Barry: Demo showi ng live OpenRA json, props for filtering, minor React tweaks.
+ *                   Based on http://www.openra.net/games/
  */
 
 "use strict"
@@ -23,13 +25,15 @@ if (typeof window !== undefined) {
     window.React = React;
 }
 
-module.exports = React.createClass({
+var App = React.createClass({
     render: function() {
         return (
             <div>
-                <BarryTest name="Barry with webpack 3" />
+                <BarryTest name="Barry test 123" />
                 <FilterableGames />
             </div>
         );
     }
 });
+
+module.exports = App;

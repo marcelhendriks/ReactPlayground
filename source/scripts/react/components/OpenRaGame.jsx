@@ -14,7 +14,8 @@ var OpenRa = require('./../../openra/OpenRaConst.js');
  *
  *  See /test/games.json for game properties.
  */
-module.exports = React.createClass({
+var OpenRaGame = React.createClass({
+
     render: function() {
         var game = this.props.game;
 
@@ -51,3 +52,5 @@ module.exports = React.createClass({
     }
 
 });
+
+module.exports = OpenRaGame;

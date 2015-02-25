@@ -7,18 +7,21 @@ var GameFilter = require('./GameFilter.jsx');
 var OpenRaGames = require('./OpenRaGames.jsx');
 
 var FilterableGames = React.createClass({
+
     getInitialState: function() {
         return {
             filterText: '',
             showAllGames: false
         };
     },
+
     handleUserInput: function(filterText, showAllGames) {
         this.setState({
             filterText: filterText,
             showAllGames: showAllGames
         });
     },
+
     render: function() {
         return (
             <div>
@@ -37,6 +40,7 @@ var FilterableGames = React.createClass({
             </div>
         );
     }
+
 });
 
 module.exports = FilterableGames;
