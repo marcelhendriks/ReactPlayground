@@ -15,6 +15,9 @@ var OpenRa = require('./../../openra/OpenRaConst.js');
 module.exports = React.createClass({
 
     /* props:
+        source
+        pollInterval
+        filterText
         showAllGames
     */
 
@@ -49,6 +52,9 @@ module.exports = React.createClass({
             return <div>Loading...</div>
         } else {
             var filterActiveOnly = function(game) { return ((game.players > 0) && (game.state != OpenRa.JSON.GAME_FINISHED)); };
+            var filterText = function(game) {
+                return (game.name.indexOf(this.props.filterText) > -1);
+            }.bind(this);
 
             // Collect stats
             var games = this.state.games.filter(filterActiveOnly);
@@ -58,7 +64,8 @@ module.exports = React.createClass({
             // var activePlayers = 0; for(var i=0; i<games.length; ++i) { activePlayers = activePlayers + parseInt(games[i].players); }
 
             // Show all games?
-            if (this.props.showAllGames) { games = this.state.games };
+            if (this.props.showAllGames)     { games = this.state.games };
+            if (this.props.filterText != '') { games = games.filter(filterText); }
 
             // Create JSX rows
             var rows = [];
@@ -68,7 +75,6 @@ module.exports = React.createClass({
 
             return(
                 <div>
-                    <h1>Server Browser</h1>
                     <p>{activePlayers} players active in {activeServers} advertized servers.</p>
                     <table>
                         <thead><tr><th>Server</th><th>Status</th><th>Mod</th><th>Map</th></tr></thead>
