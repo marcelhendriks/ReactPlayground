@@ -13,10 +13,14 @@ var OpenRa = require('./../../openra/OpenRaConst.js');
  *    <OpenRaGames source="http://master.openra.net/games_json" />
  */
 module.exports = React.createClass({
+
+    /* props:
+        showAllGames
+    */
+
     getInitialState: function() {
         return {
-            games: null,
-            showAllGames: false
+            games: null
         };
     },
 
@@ -54,11 +58,12 @@ module.exports = React.createClass({
             // var activePlayers = 0; for(var i=0; i<games.length; ++i) { activePlayers = activePlayers + parseInt(games[i].players); }
 
             // Show all games?
-            if (this.state.showAllGames) { games = this.state.games };
+            if (this.props.showAllGames) { games = this.state.games };
 
-            // React child components > array
-            var gamesList = games.map(function (game) {
-                return <OpenRaGame game={game} key={game.id} />
+            // Create JSX rows
+            var rows = [];
+            games.forEach(function(game) {
+                rows.push(<OpenRaGame game={game} key={game.id} />);
             });
 
             return(
@@ -67,7 +72,7 @@ module.exports = React.createClass({
                     <p>{activePlayers} players active in {activeServers} advertized servers.</p>
                     <table>
                         <thead><tr><th>Server</th><th>Status</th><th>Mod</th><th>Map</th></tr></thead>
-                        <tbody>{gamesList}</tbody>
+                        <tbody>{rows}</tbody>
                     </table>
                 </div>
             );

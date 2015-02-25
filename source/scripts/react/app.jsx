@@ -16,7 +16,7 @@
 
 var React = require('react');
 var BarryTest = require('./components/BarryTest.jsx');
-var OpenRaGames = require('./components/OpenRaGames.jsx');
+var FilterableGames = require('./components/FilterableGames.jsx');
 
 // Debug clientside: facilitate React tab in Chrome inspection
 if (typeof window !== undefined) {
@@ -28,7 +28,7 @@ module.exports = React.createClass({
         return (
             <div>
                 <BarryTest name="Barry with webpack 3" />
-                <OpenRaGames source="http://master.openra.net/games_json" pollInterval={2000} />
+                <FilterableGames />
             </div>
         );
     }
