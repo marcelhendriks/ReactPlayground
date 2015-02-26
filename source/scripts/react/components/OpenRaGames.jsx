@@ -41,13 +41,13 @@ var OpenRaGames = React.createClass({
             dataType: 'json',
             success: function(data) {
                 this.setState({games: data});
-                console.log('games load ok');
+                //console.log('games load ok');
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error(this.props.source, status, err.toString());
             }.bind(this)
         });
-        console.log('games load start');
+        //console.log('games load start');
     },
 
     componentDidMount: function() {
@@ -63,9 +63,7 @@ var OpenRaGames = React.createClass({
         } else {
             var filterActiveOnly = function(game) { return ((game.players > 0) && (game.state != OpenRa.JSON.GAME_FINISHED)); };
             var filterText = function(game) {
-                return (
-                    (game.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) > -1)
-                );
+                return (game.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) > -1);
             }.bind(this);
 
             // Collect stats
