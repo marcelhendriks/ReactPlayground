@@ -61,7 +61,7 @@ var OpenRaGames = React.createClass({
         if (!this.state.games) {
             return <div>Loading...</div>
         } else {
-            var filterActiveOnly = function(game) { return ((game.players > 0) && (game.state != OpenRa.JSON.GAME_FINISHED)); };
+            var filterActiveOnly = function(game) { return ((game.players > 0) && (game.state != OpenRa.JSON.GAME_FINISHED)); }
             var filterText = function(game) {
                 return (game.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) > -1);
             }.bind(this);
@@ -72,9 +72,13 @@ var OpenRaGames = React.createClass({
             var activePlayers = games.map(function(game) { return parseInt(game.players); }).reduce(function(a,b) { return a+b; }, 0);
             // ^ Using the common map-reduce pattern. Traditional code for this integer sum would be:
             // var activePlayers = 0; for(var i=0; i<games.length; ++i) { activePlayers = activePlayers + parseInt(games[i].players); }
+            // ^ While we're at it, the same code in coffeescript would be: (i think..)
+            // activePlayers = games
+            //     .map (game) -> parseInt(game.players)
+            //     .reduce (a,b) -> a+b
 
             // Show all games?
-            if (this.props.showAllGames)     { games = this.state.games };
+            if (this.props.showAllGames)     { games = this.state.games; }
             if (this.props.filterText != '') { games = games.filter(filterText); }
 
             // Create JSX rows
@@ -83,7 +87,7 @@ var OpenRaGames = React.createClass({
                 rows.push(<OpenRaGame game={game} key={game.id} />);
             });
             if (rows.length===0) {
-                rows.push(<tr><td colspan='4'>Nothing to display.</td></tr>);
+                rows.push(<tr key={-1}><td colSpan='4'>Nothing to display.</td></tr>);
             }
 
             return(

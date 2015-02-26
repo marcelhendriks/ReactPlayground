@@ -30,10 +30,10 @@ var OpenRaGame = React.createClass({
         // Inline styles > CSS
         var styles = {
             container: {
-                'background-color' : 'yellow'
+                'backgroundColor' : 'yellow'
             },
             unavailable: {
-                'background-color' : '#0082C6',
+                'backgroundColor' : '#0082C6',
                 color: 'darkgray'
             }
         };
