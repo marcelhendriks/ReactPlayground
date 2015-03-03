@@ -1,17 +1,30 @@
 // SASS compiled to CSS by webpack
 
 $pathPrefix: '/PlaylistCRUD';
-$primaryColor: #C5C0A3;
+$backgroundColor: #000000;
+$textColor: #ffffff;
 
 // ----- Define variables above this line -----
 
 body {
-  background: $primaryColor;
-  color: black;
+  background: $backgroundColor;
+  color: $textColor;
+  font-family: serif;
 }
 
 table {
-  border: none;
+  font-family: sans-serif;
+  border-collapse: collapse;
+  border: 0;
+}
+
+td {
+  padding: 1em 2em 0;
+  text-align: center;
+}
+
+small {
+  display: block;
 }
 
 /* Deprecated parts / kept as reference / example code
