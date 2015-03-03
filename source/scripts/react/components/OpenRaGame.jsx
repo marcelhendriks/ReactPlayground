@@ -23,6 +23,12 @@ var OpenRaGame = React.createClass({
         var modver = game.mods.split('@');
         var modText = 'Mod unknown ('+game.mods+')';
         if (modver[0] in OpenRa.JSON.MODS) { modText = OpenRa.JSON.MODS[modver[0]]; }
+
+        // Style when release does not have a recent version
+        var release_tag = "release-20141029";
+        var playtest_tag = "playtest-20150118";
+        var recentRelease = !((modver[1] != release_tag) && (modver[1] != playtest_tag));
+
         var modRelease = modver[1];
         var gameAvailable = (game.state==OpenRa.JSON.GAME_WAITING);
         var playerNames = ('clients' in game) ? game.clients.join(', ') : '';
@@ -30,24 +36,28 @@ var OpenRaGame = React.createClass({
         // Inline styles > CSS
         var styles = {
             container: {
-                'backgroundColor' : 'yellow'
+                'color': '#0A0'
             },
             unavailable: {
-                'backgroundColor' : '#0082C6',
-                color: 'darkgray'
+                'color': '#F80'
+            },
+            outofdate: {
+                'color': '#999'
             }
         };
 
         // Content JSX > HTML
         return(
             <tr style={m(
-                styles.container,
-                !gameAvailable && styles.unavailable
+                !recentRelease && styles.outofdate
             )}>
-                <td><p>{game.name}</p><small>{game.address}</small></td>
-                <td><p>{(game.state==OpenRa.JSON.GAME_PLAYING) ? 'Playing' : 'Waiting'}</p><small title={playerNames}>{game.players} players</small></td>
-                <td><p>{modText}</p><small>{modRelease}</small></td>
-                <td><p>todo</p><small>..</small></td>
+                <td>{game.name}<small>{game.address}</small></td>
+                <td><span style={m(
+                    styles.container,
+                    !gameAvailable && styles.unavailable
+                )}>{(game.state==OpenRa.JSON.GAME_PLAYING) ? 'Playing' : 'Waiting'}</span><small title={playerNames}>{game.players} players</small></td>
+                <td>{modText}<small>{modRelease}</small></td>
+                <td>todo<small>..</small></td>
             </tr>
         );
     }
